@@ -59,9 +59,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["word"])) {
     }
 }
 
+if (isset($_POST["reset"])) {
+    session_destroy();
+    header("Location: index.php");
+    exit();
+}
+
 echo "<p>Palabra: " . showLetter() . "</p>";
 echo "<p>Letras adivinadas: " . implode(', ', array_keys($_SESSION["guessed_letters"], true)) . "</p>";
 echo "<p>Intentos restantes: " . $_SESSION["remaining_attempts"] . "</p>";
 
-include('index.php');
+require_once('index.php');
 ?>
