@@ -3,11 +3,13 @@ session_start();
 
 $array_words = ["felino", "chocolate", "desarrollo", "agua", "monitor"];
 
-function chooseWord($array_words) {
+function chooseWord($array_words)
+{
     return $array_words[array_rand($array_words)];
 }
 
-function showLetter() {
+function showLetter()
+{
     $word_show = "";
     $guessed_letters = $_SESSION["guessed_letters"];
     $hidden_word = $_SESSION["hidden_word"];
@@ -19,34 +21,38 @@ function showLetter() {
             $word_show .= "_ ";
         }
     }
-    return trim($word_show); 
+    return trim($word_show);
 }
 
 if (!isset($_SESSION["hidden_word"])) {
     $_SESSION["hidden_word"] = str_split(chooseWord($array_words));
     $_SESSION["guessed_letters"] = array_fill(0, count($_SESSION["hidden_word"]), false);
-    $_SESSION["remaining_attempts"] = 6; 
+    $_SESSION["remaining_attempts"] = 6;
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["word"])) {
-    $word = strtoupper($_POST["word"]); 
+    $word = strtoupper($_POST["word"]);
 
     $char_in_word = false;
+    $letter_already_guessed = false;
 
     for ($i = 0; $i < count($_SESSION["hidden_word"]); $i++) {
         if (strtoupper($_SESSION["hidden_word"][$i]) == $word) {
             if ($_SESSION["guessed_letters"][$i]) {
-                echo "La letra '$word' ya ha sido adivinada. Intenta con otra.";
+                $letter_already_guessed = true;
             } else {
                 $_SESSION["guessed_letters"][$i] = true;
                 $char_in_word = true;
-                echo "Bien hecho! Has adivinado la letra '$word'.";
             }
         }
     }
 
-    if (!$char_in_word) {
-        echo "La letra '$word' no está en la palabra. Intentalo de nuevo.";
+    if ($char_in_word && !$letter_already_guessed) {
+        echo "Bien hecho! Has adivinado la letra '$word'.";
+    } elseif ($letter_already_guessed) {
+        echo "La letra '$word' ya ha sido adivinada. Intenta con otra.";
+    } else {
+        echo "La letra '$word' no está en la palabra. Inténtalo de nuevo.";
         $_SESSION["remaining_attempts"]--;
     }
 
@@ -70,4 +76,3 @@ echo "<p>Letras adivinadas: " . implode(', ', array_keys($_SESSION["guessed_lett
 echo "<p>Intentos restantes: " . $_SESSION["remaining_attempts"] . "</p>";
 
 require_once('index.php');
-?>
