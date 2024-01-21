@@ -54,4 +54,4 @@ Proyecto pedagógico que implementa un juego del ahorcado en PHP. Los jugadores 
 *Desiree Sánchez*
 
 ---
-*Imagen de fondo sacada de Vecteezy: <a href="https://es.vecteezy.com/vectores-gratis/desierto">Desierto Vectores por Vecteezy</a>*
+*Imagen del background del proyecto sacada de Vecteezy: <a href="https://es.vecteezy.com/vectores-gratis/desierto">Desierto Vectores por Vecteezy</a>*
