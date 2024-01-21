@@ -1,6 +1,7 @@
 <?php
 
 require_once('game.php');
+$messages = processGuess();
 
 ?>
 
@@ -15,24 +16,25 @@ require_once('game.php');
 </head>
 
 <body>
-
     <div class="container_game">
         <div class="info_game">
             <?php
             echo "<p>Palabra: " . showLetter() . "</p>";
-            echo "<p>Letras adivinadas: " . implode(', ', array_keys($_SESSION["guessed_letters"], true)) . "</p>";
-            echo "<p>Intentos restantes: " . $_SESSION["remaining_attempts"] . "</p>";
-
+            echo "<p class='remaining_attemps_text'>Intentos restantes: " . $_SESSION["remaining_attempts"] . "</p>";
+            ?>
+        </div>
+        <div class="message_alerts">
+            <?php
+            echo $messages;
             ?>
         </div>
 
-        <div class="picture_hangman">
+        <div class="container_picture_hangman">
             <?php echo displayHangman($_SESSION["remaining_attempts"]); ?>
         </div>
 
-        <form action="game.php" method="POST">
+        <form action="game.php" class="form_game" method="POST">
 
-            <h3>Escoge una letra!</h3>
             <div class="buttons_game">
                 <button type="submit" name="word" value="A">A</button>
                 <button type="submit" name="word" value="B">B</button>
@@ -62,7 +64,7 @@ require_once('game.php');
                 <button type="submit" name="word" value="Z">Z</button>
             </div>
 
-            <button type="submit" name="reset" value="reset">Reiniciar Juego</button>
+            <button type="submit" class="reset_btn" name="reset" value="reset">Reiniciar Juego</button>
 
         </form>
     </div>
