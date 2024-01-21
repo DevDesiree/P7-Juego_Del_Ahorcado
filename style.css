@@ -1,6 +1,80 @@
+body {
+    background: url("./img/background-west-pixel.jpg");
+    font-family: "Gill Sans", sans-serif;
+    font-weight: 600;
+}
+
 .container_game {
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    background-color: rgba(240, 228, 213, 0.808);
+    max-width: 50%;
+    margin: auto;
+    border-radius: 5px;
+    font-size: 25px;
+}
+
+.form_game{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttons_game {
+    max-width: 350px;
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.buttons_game button{
+    padding: 10px;
+    border-radius: 10px;
+    background-color: brown;
+    color: white;
+}
+
+.reset_btn{
+    padding: 15px;
+    border-radius: 15px;
+    background-color: blue;
+    color: white;
+    margin-bottom: 5px;
+}
+
+ img{
+    max-width: 400px;
+}
+
+.remaining_attemps_text{
+    color: blue;
+    margin: 25px 0 0 0 ;
+}
+
+.sucess_char_message{
+    color: green;
+}
+
+.win_message {
+    background-color: green;
+    font-size: 25px;
+    color: white;
+}
+
+.fail_char_message{
+    color: red;
+}
+
+.lose_message{
+    background-color: rgba(255, 0, 0, 0.808);
+    color: white;
+}
+
+.same_char_message{
+   color: rgb(151, 48, 8);
 }
