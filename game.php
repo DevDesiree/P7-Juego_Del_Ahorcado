@@ -2,7 +2,7 @@
 
 session_start();
 
-$array_words = ["felino", "chocolate", "desarrollo", "agua", "monitor", "lenguaje"];
+$array_words = ["felino", "chocolate", "desarrollo", "agua", "monitor", "lenguaje", "python"];
 
 function chooseWord($array_words)
 {
@@ -11,7 +11,8 @@ function chooseWord($array_words)
 }
 
 
-function initializeGameSession($array_words) {
+function initializeGameSession($array_words)
+{
     if (!isset($_SESSION["hidden_word"])) {
         $_SESSION["hidden_word"] = str_split(chooseWord($array_words));
         $_SESSION["guessed_letters"] = array_fill(0, count($_SESSION["hidden_word"]), false);
@@ -115,10 +116,13 @@ function displayHangman($remaining_attempts)
     return $hangman_display;
 }
 
-if (isset($_POST["reset"])) {
-    session_destroy();
-    header("Location: index.php");
+function resetGame() {
+    if (isset($_POST["reset"])) {
+        session_destroy();
+        header("Location: index.php");
+    }
 }
 
-require_once('index.php');
+resetGame();
 
+require_once('index.php');
