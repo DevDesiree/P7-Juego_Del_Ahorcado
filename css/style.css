@@ -1,5 +1,5 @@
 body {
-    background: url("./img/background-west-pixel.jpg");
+    background-image: url("../img/background-west-pixel.jpg");
     font-family: "Gill Sans", sans-serif;
     font-weight: 600;
 }
