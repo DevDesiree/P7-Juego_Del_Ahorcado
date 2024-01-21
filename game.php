@@ -1,13 +1,26 @@
 <?php
+
 session_start();
 
-$array_words = ["felino", "chocolate", "desarrollo", "agua", "monitor"];
+$array_words = ["felino", "chocolate", "desarrollo", "agua", "monitor", "lenguaje"];
 
 function chooseWord($array_words)
 {
     $chosenWord = $array_words[array_rand($array_words)];
     return strtoupper($chosenWord);
 }
+
+
+function initializeGameSession($array_words) {
+    if (!isset($_SESSION["hidden_word"])) {
+        $_SESSION["hidden_word"] = str_split(chooseWord($array_words));
+        $_SESSION["guessed_letters"] = array_fill(0, count($_SESSION["hidden_word"]), false);
+        $_SESSION["remaining_attempts"] = 6;
+    }
+}
+
+initializeGameSession($array_words);
+
 
 function showLetter()
 {
@@ -22,14 +35,9 @@ function showLetter()
             $word_show .= "_ ";
         }
     }
-    return trim($word_show);
+    return $word_show;
 }
 
-if (!isset($_SESSION["hidden_word"])) {
-    $_SESSION["hidden_word"] = str_split(chooseWord($array_words));
-    $_SESSION["guessed_letters"] = array_fill(0, count($_SESSION["hidden_word"]), false);
-    $_SESSION["remaining_attempts"] = 6;
-}
 
 function processGuess()
 {
@@ -62,7 +70,7 @@ function processGuess()
         }
 
         if ($_SESSION["remaining_attempts"] <= 0) {
-            $messages .= "<p class='lose_message'>Has agotado todos los intentos!! La palabra era " . implode("", $_SESSION["hidden_word"]) . ".</p>";
+            $messages .= "<p class='lose_message'>Has agotado todos los intentos!! La palabra era: " . implode("", $_SESSION["hidden_word"]) . ".</p>";
             session_destroy();
         } elseif (!in_array(false, $_SESSION["guessed_letters"])) {
             $messages .= "<p class='win_message'>Felicidades!! Has adivinado la palabra 😄.</p>";
@@ -112,5 +120,5 @@ if (isset($_POST["reset"])) {
     header("Location: index.php");
 }
 
-
 require_once('index.php');
+

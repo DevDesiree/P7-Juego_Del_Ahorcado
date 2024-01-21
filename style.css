@@ -15,6 +15,14 @@ body {
     border-radius: 5px;
     font-size: 25px;
 }
+h1 {
+    margin: 0;
+    color: brown;
+}
+
+.choosen_word {
+    font-size: 35px;
+}
 
 .form_game{
     display: flex;

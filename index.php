@@ -17,9 +17,10 @@ $messages = processGuess();
 
 <body>
     <div class="container_game">
+        <h1>Hangman Game</h1>
         <div class="info_game">
             <?php
-            echo "<p>Palabra: " . showLetter() . "</p>";
+            echo "<p class='choosen_word'>Palabra: " . showLetter() . "</p>";
             echo "<p class='remaining_attemps_text'>Intentos restantes: " . $_SESSION["remaining_attempts"] . "</p>";
             ?>
         </div>
